@@ -95,13 +95,8 @@ export function buildEquityCurve(results: TradeResult[]) {
 
 export function buildProjection(results: TradeResult[], referenceDate = new Date()) {
   const metrics = calculateMetrics(results, 0, referenceDate);
-  const volatility = calculateVolatility(results.map((item) => Number(item.result_value)));
   const businessDays = getBusinessDaysUntilEndOfMonth(referenceDate);
-  const scenarios = [
-    { key: "conservador", daily: metrics.averageDaily - volatility },
-    { key: "realista", daily: metrics.averageDaily },
-    { key: "otimista", daily: metrics.averageDaily + volatility },
-  ] as const;
+  const scenarios = buildProjectionScenarios(metrics.averageDaily);
 
   return businessDays.map((day, index) => {
     const projectedDays = index + 1;
@@ -115,11 +110,28 @@ export function buildProjection(results: TradeResult[], referenceDate = new Date
   });
 }
 
-export function calculateVolatility(values: number[]) {
-  if (values.length <= 1) return 0;
-  const average = values.reduce((sum, value) => sum + value, 0) / values.length;
-  const variance = values.reduce((sum, value) => sum + (value - average) ** 2, 0) / (values.length - 1);
-  return Math.sqrt(variance);
+function buildProjectionScenarios(averageDaily: number) {
+  if (averageDaily > 0) {
+    return [
+      { key: "conservador", daily: averageDaily * 0.5 },
+      { key: "realista", daily: averageDaily },
+      { key: "otimista", daily: averageDaily * 1.5 },
+    ] as const;
+  }
+
+  if (averageDaily < 0) {
+    return [
+      { key: "conservador", daily: averageDaily * 1.5 },
+      { key: "realista", daily: averageDaily },
+      { key: "otimista", daily: averageDaily * 0.5 },
+    ] as const;
+  }
+
+  return [
+    { key: "conservador", daily: 0 },
+    { key: "realista", daily: 0 },
+    { key: "otimista", daily: 0 },
+  ] as const;
 }
 
 export function monthResults(results: TradeResult[], referenceDate: Date) {
