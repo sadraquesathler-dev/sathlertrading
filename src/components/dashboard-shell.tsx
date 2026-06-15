@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, BadgeDollarSign, CalendarClock, Gauge, Landmark, LineChart, PiggyBank, ShieldCheck, Target, TrendingDown, TrendingUp, Wallet } from "lucide-react";
+import { Activity, BadgeDollarSign, BarChart3, CalendarClock, Gauge, Landmark, PiggyBank, ShieldCheck, Target, TrendingDown, TrendingUp, Wallet } from "lucide-react";
 import { AppHeader } from "@/components/app-header";
 import { AuthPanel } from "@/components/auth-panel";
 import { DashboardSkeleton } from "@/components/dashboard-skeleton";
@@ -19,13 +19,23 @@ export function DashboardShell() {
 
   if (!user && !loading) {
     return (
-      <main className="market-grid min-h-screen">
+      <main className="cosmic-page min-h-screen">
+        <div className="cosmic-nebula" />
+        <div className="meteor-field" />
+        <div className="planet-horizon" />
         <AppHeader user={user} onSignIn={signIn} onSignOut={signOut} />
-        <section className="container grid min-h-[calc(100vh-4rem)] items-center gap-8 py-10 lg:grid-cols-[1fr_420px]">
+        <section className="container grid min-h-[calc(100vh-5.25rem)] items-center gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_500px] lg:gap-14">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex rounded-md border border-primary/30 bg-primary/10 px-3 py-1 text-sm text-primary">Performance financeira com dados privados</div>
-            <h1 className="text-4xl font-semibold tracking-normal sm:text-6xl">Controle sua curva de capital com precisão profissional.</h1>
-            <p className="max-w-2xl text-lg text-muted-foreground">Entre com email e senha ou Google para registrar operações, acompanhar objetivos mensais, analisar estatísticas e projetar cenários até o último dia útil do mês.</p>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[.04] px-3.5 py-2 text-sm text-slate-200 shadow-[0_14px_42px_rgba(0,0,0,.28)] backdrop-blur-xl">
+              <ShieldCheck className="h-4 w-4 text-cyan-300" />
+              Performance financeira com dados privados
+            </div>
+            <h1 className="max-w-3xl text-4xl font-semibold leading-[1.05] tracking-normal text-white drop-shadow-[0_0_20px_rgba(0,0,0,.34)] sm:text-6xl lg:text-[64px]">
+              Controle sua curva de capital com <span className="gradient-title">precisão profissional.</span>
+            </h1>
+            <p className="max-w-xl text-base leading-7 text-slate-300/85 sm:text-lg">
+              Entre com email e senha ou Google para registrar operações, acompanhar objetivos mensais, analisar estatísticas e projetar cenários até o último dia útil do mês.
+            </p>
           </div>
           <AuthPanel onGoogleSignIn={signIn} onPasswordSignIn={signInWithPassword} onPasswordSignUp={signUpWithPassword} />
         </section>
@@ -34,13 +44,16 @@ export function DashboardShell() {
   }
 
   return (
-    <main className="market-grid min-h-screen pb-10">
+    <main className="cosmic-page min-h-screen pb-10">
+      <div className="cosmic-nebula" />
+      <div className="meteor-field" />
+      <div className="planet-horizon" />
       <AppHeader user={user} onSignIn={signIn} onSignOut={signOut} />
       <div className="container space-y-6 pt-6">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm uppercase text-muted-foreground">Mesa operacional</p>
-            <h1 className="text-3xl font-semibold capitalize tracking-normal">{getMonthLabel(referenceDate)}</h1>
+            <h1 className="text-3xl font-semibold capitalize tracking-normal text-white">{getMonthLabel(referenceDate)}</h1>
           </div>
           {error && <div className="rounded-md border border-loss/40 bg-loss/10 px-3 py-2 text-sm text-loss">{error}</div>}
         </div>
@@ -60,7 +73,7 @@ export function DashboardShell() {
               <MetricCard title="Média diária" value={formatCurrency(metrics.averageDaily)} icon={Activity} tone={metrics.averageDaily >= 0 ? "profit" : "loss"} />
               <MetricCard title="Melhor dia" value={formatCurrency(metrics.bestDay)} icon={TrendingUp} tone="profit" />
               <MetricCard title="Pior dia" value={formatCurrency(metrics.worstDay)} icon={TrendingDown} tone="loss" />
-              <MetricCard title="Operações" value={String(metrics.operatedDays)} icon={LineChart} />
+              <MetricCard title="Operações" value={String(metrics.operatedDays)} icon={BarChart3} />
               <MetricCard title="Capital atual" value={formatCurrency(metrics.currentEquity)} icon={Wallet} tone={metrics.currentEquity >= 0 ? "profit" : "loss"} />
               <MetricCard title="Capital máximo" value={formatCurrency(metrics.maxEquity)} icon={Landmark} tone="accent" />
               <MetricCard title="Drawdown atual" value={formatCurrency(metrics.currentDrawdown)} icon={TrendingDown} tone={metrics.currentDrawdown > 0 ? "loss" : "profit"} />

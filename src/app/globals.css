@@ -4,40 +4,290 @@
 
 @layer base {
   :root {
-    --background: 220 28% 6%;
+    --background: 226 72% 4%;
     --foreground: 210 22% 96%;
-    --card: 220 24% 9%;
+    --card: 235 58% 7%;
     --card-foreground: 210 22% 96%;
-    --primary: 158 80% 48%;
+    --primary: 270 100% 68%;
     --primary-foreground: 220 30% 6%;
-    --secondary: 214 18% 16%;
+    --secondary: 235 54% 13%;
     --secondary-foreground: 210 22% 96%;
-    --muted: 216 18% 14%;
-    --muted-foreground: 214 13% 66%;
-    --accent: 202 87% 54%;
+    --muted: 236 42% 11%;
+    --muted-foreground: 220 18% 72%;
+    --accent: 194 100% 58%;
     --accent-foreground: 220 30% 6%;
-    --destructive: 350 100% 66%;
+    --destructive: 338 100% 66%;
     --destructive-foreground: 210 22% 96%;
-    --border: 214 18% 18%;
-    --input: 214 18% 18%;
-    --ring: 158 80% 48%;
+    --border: 258 68% 34%;
+    --input: 258 68% 34%;
+    --ring: 194 100% 58%;
     --radius: 0.5rem;
+    --cosmic-purple: #a855ff;
+    --cosmic-blue: #1f6bff;
+    --cosmic-cyan: #00e7ff;
+    --cosmic-magenta: #ff3fd4;
+    --glass-border: rgba(125, 154, 255, .22);
+    --glass-card: rgba(5, 9, 24, .72);
   }
 
   * { @apply border-border; }
   body {
     @apply min-h-screen bg-background text-foreground antialiased;
     background:
-      linear-gradient(180deg, rgba(23, 32, 43, .9), rgba(8, 12, 18, .98) 38%),
-      radial-gradient(circle at 10% 0%, rgba(24, 210, 127, .16), transparent 28%),
-      radial-gradient(circle at 90% 10%, rgba(65, 181, 255, .12), transparent 30%),
-      #080c12;
+      radial-gradient(ellipse at 12% 18%, rgba(168, 85, 255, .48), transparent 30%),
+      radial-gradient(ellipse at 34% 34%, rgba(255, 63, 212, .22), transparent 28%),
+      radial-gradient(ellipse at 72% 28%, rgba(0, 118, 255, .34), transparent 33%),
+      radial-gradient(ellipse at 88% 64%, rgba(0, 231, 255, .18), transparent 30%),
+      linear-gradient(135deg, #030712 0%, #050816 42%, #070b1d 72%, #01020a 100%);
   }
 }
 
 @layer components {
+  .cosmic-page {
+    position: relative;
+    isolation: isolate;
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(1,2,10,.84), rgba(1,2,10,.54) 44%, rgba(1,2,10,.82)),
+      linear-gradient(180deg, rgba(1,2,10,.6), rgba(1,2,10,.7) 68%, rgba(1,2,10,.93)),
+      url("/images/cosmic-bg.webp") center / cover no-repeat,
+      #01020a;
+  }
+
+  .cosmic-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -3;
+    background:
+      radial-gradient(ellipse at 20% 42%, rgba(168,85,255,.14), transparent 29%),
+      radial-gradient(ellipse at 82% 44%, rgba(0,231,255,.12), transparent 32%),
+      radial-gradient(ellipse at 50% 50%, transparent 36%, rgba(1,2,10,.5) 72%, rgba(1,2,10,.86));
+    opacity: .9;
+  }
+
+  .cosmic-page::after {
+    content: "";
+    position: fixed;
+    inset: -22%;
+    pointer-events: none;
+    z-index: -2;
+    background:
+      radial-gradient(ellipse at 13% 48%, rgba(255, 63, 212, .09), transparent 30%),
+      radial-gradient(ellipse at 88% 52%, rgba(0, 231, 255, .08), transparent 32%);
+    filter: blur(44px) saturate(1.08);
+  }
+
+  .cosmic-nebula {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .cosmic-nebula::before {
+    content: "";
+    position: absolute;
+    left: -18%;
+    top: 4%;
+    width: 62vw;
+    height: 56vh;
+    background:
+      radial-gradient(ellipse at 38% 38%, rgba(255, 63, 212, .1), transparent 24%),
+      radial-gradient(ellipse at 52% 56%, rgba(168, 85, 255, .12), transparent 32%);
+    filter: blur(58px) saturate(1.08);
+    opacity: .58;
+  }
+
+  .cosmic-nebula::after {
+    content: "";
+    position: absolute;
+    right: -12%;
+    top: 18%;
+    width: 60vw;
+    height: 58vh;
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(0, 231, 255, .1), transparent 24%),
+      radial-gradient(ellipse at 38% 58%, rgba(31, 107, 255, .12), transparent 32%);
+    filter: blur(60px) saturate(1.08);
+    opacity: .56;
+  }
+
+  .meteor-field {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: .14;
+    background:
+      linear-gradient(135deg, transparent 0 48%, rgba(255,63,212,.72) 49%, transparent 51%) 5% 72% / 170px 170px no-repeat,
+      linear-gradient(135deg, transparent 0 48%, rgba(0,231,255,.75) 49%, transparent 51%) 94% 28% / 220px 220px no-repeat,
+      linear-gradient(135deg, transparent 0 48%, rgba(168,85,255,.52) 49%, transparent 51%) 58% 22% / 180px 180px no-repeat;
+  }
+
+  .planet-horizon {
+    position: fixed;
+    left: 50%;
+    bottom: -18vh;
+    z-index: -1;
+    width: 118vw;
+    height: 30vh;
+    transform: translateX(-50%);
+    border-radius: 50% 50% 0 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(0,231,255,.13), transparent 16%),
+      radial-gradient(ellipse at 28% 2%, rgba(255,63,212,.1), transparent 18%),
+      linear-gradient(180deg, rgba(0,231,255,.09), rgba(168,85,255,.04) 22%, transparent 56%);
+    box-shadow:
+      0 -6px 22px rgba(0,231,255,.14),
+      0 -12px 54px rgba(31,107,255,.1),
+      0 -18px 80px rgba(255,63,212,.06);
+    opacity: .38;
+  }
+
+  .cosmic-header {
+    border: 1px solid rgba(125,154,255,.18);
+    background: linear-gradient(180deg, rgba(8,12,28,.72), rgba(3,7,18,.54));
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.07),
+      0 18px 58px rgba(0,0,0,.38),
+      0 0 38px rgba(31,107,255,.08);
+    backdrop-filter: blur(24px) saturate(1.18);
+  }
+
+  .neon-card {
+    position: relative;
+    border: 1px solid rgba(125,154,255,.22);
+    background:
+      linear-gradient(145deg, rgba(13,18,40,.76), rgba(3,7,18,.76)),
+      radial-gradient(circle at 18% 12%, rgba(168,85,255,.08), transparent 32%),
+      radial-gradient(circle at 88% 88%, rgba(0,231,255,.07), transparent 34%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.08),
+      0 24px 72px rgba(0,0,0,.46),
+      0 0 36px rgba(31,107,255,.08);
+    backdrop-filter: blur(26px) saturate(1.18);
+  }
+
+  .neon-card:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.1),
+      0 26px 80px rgba(0,0,0,.5),
+      0 0 48px rgba(0,231,255,.13),
+      0 0 44px rgba(168,85,255,.12);
+  }
+
+  .neon-button {
+    background-image: linear-gradient(100deg, #d946ef 0%, #8b5cf6 34%, #2563eb 70%, #22d3ee 100%);
+    box-shadow:
+      0 12px 30px rgba(31,107,255,.24),
+      0 0 28px rgba(168,85,255,.18),
+      inset 0 1px 0 rgba(255,255,255,.2);
+    transition: box-shadow .2s ease, transform .2s ease, filter .2s ease;
+  }
+
+  .neon-button:hover {
+    filter: brightness(1.08);
+    box-shadow:
+      0 16px 38px rgba(31,107,255,.3),
+      0 0 42px rgba(168,85,255,.24),
+      0 0 28px rgba(0,231,255,.12),
+      inset 0 1px 0 rgba(255,255,255,.24);
+  }
+
+  .gradient-title {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(95deg, #dbeafe 0%, #93c5fd 42%, #22d3ee 100%);
+    filter: drop-shadow(0 0 18px rgba(0,231,255,.12));
+  }
+
+  .premium-glass {
+    border: 1px solid rgba(125,154,255,.18);
+    background: linear-gradient(145deg, rgba(8,13,31,.68), rgba(3,7,18,.6));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 18px 56px rgba(0,0,0,.34);
+    backdrop-filter: blur(22px) saturate(1.12);
+  }
+
+  .cosmic-bg,
   .market-grid {
-    background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-    background-size: 44px 44px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .cosmic-bg::before,
+  .market-grid::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,.82) 0 1px, transparent 1.5px),
+      radial-gradient(circle, rgba(0,231,255,.5) 0 1px, transparent 1.6px),
+      radial-gradient(circle, rgba(255,63,212,.38) 0 1px, transparent 1.7px),
+      radial-gradient(circle, rgba(168,85,255,.5) 0 1.1px, transparent 1.9px);
+    background-position: 0 0, 34px 58px, 78px 18px, 112px 92px;
+    background-size: 118px 118px, 160px 160px, 220px 220px, 280px 280px;
+    opacity: .6;
+  }
+
+  .cosmic-bg::after,
+  .market-grid::after {
+    content: "";
+    position: fixed;
+    inset: -28%;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse at 4% 22%, rgba(255,0,245,.7), transparent 28%),
+      radial-gradient(ellipse at 19% 36%, rgba(168,85,255,.54), transparent 30%),
+      radial-gradient(ellipse at 57% 44%, rgba(31,107,255,.42), transparent 30%),
+      radial-gradient(ellipse at 82% 28%, rgba(0,231,255,.34), transparent 31%),
+      radial-gradient(ellipse at 50% 126%, rgba(0,231,255,.5), transparent 18%),
+      radial-gradient(ellipse at 50% 134%, rgba(255,63,212,.52), transparent 21%);
+    filter: blur(24px) saturate(1.6);
+  }
+
+  .market-grid {
+    background-image:
+      radial-gradient(ellipse at 50% 112%, rgba(0,231,255,.34), transparent 14%),
+      radial-gradient(ellipse at 50% 122%, rgba(255,63,212,.28), transparent 18%),
+      linear-gradient(rgba(168,85,255,.014) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,231,255,.012) 1px, transparent 1px);
+    background-size: auto, auto, 96px 96px, 96px 96px;
+  }
+
+  .glass-card {
+    background:
+      linear-gradient(145deg, rgba(29, 18, 78, .78), rgba(5, 8, 25, .62)),
+      linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0));
+    border-color: var(--glass-border);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.12),
+      0 0 0 1px rgba(0,231,255,.12),
+      0 26px 90px rgba(0,0,0,.58),
+      0 0 66px rgba(168,85,255,.28),
+      0 0 110px rgba(0,231,255,.08);
+    backdrop-filter: blur(30px) saturate(1.35);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(90deg, #c4b5fd 0%, #60a5fa 56%, #67e8f9 100%);
+    filter: none;
+  }
+
+  .gradient-button {
+    background-image: linear-gradient(100deg, #d946ef 0%, #8b5cf6 32%, #2563eb 68%, #22d3ee 100%);
+    box-shadow: 0 12px 30px rgba(31,107,255,.24), 0 0 28px rgba(168,85,255,.16), inset 0 1px 0 rgba(255,255,255,.2);
+  }
+
+  .neon-border {
+    border-color: rgba(125,154,255,.22);
+    box-shadow: 0 0 0 1px rgba(168,85,255,.12), 0 0 28px rgba(0,231,255,.08);
   }
 }

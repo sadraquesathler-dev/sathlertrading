@@ -8,6 +8,13 @@ import { buildEquityCurve, buildProjection } from "@/lib/calculations";
 import { formatCurrency } from "@/lib/format";
 import type { TradeResult } from "@/types/database";
 
+const tooltipStyle = {
+  background: "rgba(10, 12, 32, .92)",
+  border: "1px solid rgba(25,230,255,.24)",
+  borderRadius: 8,
+  boxShadow: "0 0 38px rgba(168,85,255,.28)",
+};
+
 export function PerformanceCharts({ results }: { results: TradeResult[] }) {
   const equity = buildEquityCurve(results);
   const projection = buildProjection(results);
@@ -21,11 +28,11 @@ export function PerformanceCharts({ results }: { results: TradeResult[] }) {
           {equity.length ? (
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={equity} margin={{ left: 0, right: 12, top: 12, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,.08)" />
-                <XAxis dataKey="date" stroke="#94a3b8" fontSize={12} />
-                <YAxis stroke="#94a3b8" fontSize={12} tickFormatter={(value) => `${Number(value) / 1000}k`} />
-                <Tooltip formatter={tooltipFormatter} contentStyle={{ background: "#101722", border: "1px solid #263241", borderRadius: 8 }} />
-                <Line type="monotone" dataKey="accumulated" name="Resultado acumulado" stroke="#18d27f" strokeWidth={2.5} dot={{ r: 3 }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(168,85,255,.2)" />
+                <XAxis dataKey="date" stroke="#9fb2d8" fontSize={12} />
+                <YAxis stroke="#9fb2d8" fontSize={12} tickFormatter={(value) => `${Number(value) / 1000}k`} />
+                <Tooltip formatter={tooltipFormatter} contentStyle={tooltipStyle} />
+                <Line type="monotone" dataKey="accumulated" name="Resultado acumulado" stroke="#00e7ff" strokeWidth={3.2} dot={{ r: 3, fill: "#00e7ff" }} />
               </LineChart>
             </ResponsiveContainer>
           ) : (
@@ -38,15 +45,15 @@ export function PerformanceCharts({ results }: { results: TradeResult[] }) {
         <CardContent className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={projection} margin={{ left: 0, right: 12, top: 12, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,.08)" />
-              <XAxis dataKey="date" stroke="#94a3b8" fontSize={12} />
-              <YAxis stroke="#94a3b8" fontSize={12} tickFormatter={(value) => `${Number(value) / 1000}k`} />
-              <Tooltip formatter={tooltipFormatter} contentStyle={{ background: "#101722", border: "1px solid #263241", borderRadius: 8 }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(168,85,255,.2)" />
+              <XAxis dataKey="date" stroke="#9fb2d8" fontSize={12} />
+              <YAxis stroke="#9fb2d8" fontSize={12} tickFormatter={(value) => `${Number(value) / 1000}k`} />
+              <Tooltip formatter={tooltipFormatter} contentStyle={tooltipStyle} />
               <Legend />
-              <Area type="monotone" dataKey="otimista" fill="rgba(65,181,255,.08)" stroke="none" />
+              <Area type="monotone" dataKey="otimista" fill="rgba(168,85,255,.16)" stroke="none" />
               <Line type="monotone" dataKey="conservador" name="Conservador" stroke="#f5b94f" strokeWidth={2} dot={false} />
-              <Line type="monotone" dataKey="realista" name="Realista" stroke="#18d27f" strokeWidth={2} dot={false} />
-              <Line type="monotone" dataKey="otimista" name="Otimista" stroke="#41b5ff" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="realista" name="Realista" stroke="#00e7ff" strokeWidth={2.5} dot={false} />
+              <Line type="monotone" dataKey="otimista" name="Otimista" stroke="#a855ff" strokeWidth={2.5} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </CardContent>

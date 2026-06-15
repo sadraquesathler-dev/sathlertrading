@@ -39,7 +39,10 @@ export function GrowthPage() {
   }, [equityCurve, initial, target]);
 
   return (
-    <main className="market-grid min-h-screen pb-10">
+    <main className="cosmic-page min-h-screen pb-10">
+      <div className="cosmic-nebula" />
+      <div className="meteor-field" />
+      <div className="planet-horizon" />
       <header className="border-b border-border/80 bg-background/82 backdrop-blur-xl">
         <div className="container flex h-16 items-center justify-between">
           <Button asChild variant="ghost"><Link href="/"><ArrowLeft className="h-4 w-4" />Painel</Link></Button>
