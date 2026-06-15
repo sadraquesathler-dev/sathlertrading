@@ -16,20 +16,33 @@ export function AuthPanel({
   onPasswordSignIn: (email: string, password: string) => Promise<void>;
   onPasswordSignUp: (email: string, password: string) => Promise<void>;
 }) {
+  const [mode, setMode] = useState<"sign-in" | "sign-up">("sign-in");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loadingAction, setLoadingAction] = useState<"sign-in" | "sign-up" | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  async function submit(action: "sign-in" | "sign-up") {
-    setLoadingAction(action);
+  function switchMode(nextMode: "sign-in" | "sign-up") {
+    setMode(nextMode);
+    setMessage(null);
+    setError(null);
+    setConfirmPassword("");
+  }
+
+  async function submit() {
+    setLoadingAction(mode);
     setMessage(null);
     setError(null);
     try {
-      if (action === "sign-in") {
+      if (mode === "sign-in") {
         await onPasswordSignIn(email, password);
       } else {
+        if (password !== confirmPassword) {
+          setError("As senhas não conferem.");
+          return;
+        }
         await onPasswordSignUp(email, password);
         setMessage("Conta criada. Se a confirmação por email estiver ativa no Supabase, confirme seu email antes de entrar.");
       }
@@ -40,6 +53,9 @@ export function AuthPanel({
     }
   }
 
+  const isSignUp = mode === "sign-up";
+  const disabled = !email || !password || (isSignUp && !confirmPassword) || loadingAction !== null;
+
   return (
     <Card className="neon-card relative w-full max-w-lg overflow-hidden rounded-[1.75rem] px-2 py-3">
       <div className="relative">
@@ -48,8 +64,8 @@ export function AuthPanel({
             <TrendingUp className="h-6 w-6" />
           </div>
           <div>
-            <CardTitle className="text-2xl font-semibold text-white">Acesso ao painel</CardTitle>
-            <p className="mt-2 text-sm text-muted-foreground">Faça login para continuar</p>
+            <CardTitle className="text-2xl font-semibold text-white">{isSignUp ? "Criar sua conta" : "Acesso ao painel"}</CardTitle>
+            <p className="mt-2 text-sm text-muted-foreground">{isSignUp ? "Cadastre-se para acompanhar sua performance" : "Faça login para continuar"}</p>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -64,17 +80,27 @@ export function AuthPanel({
             <Label htmlFor="auth-password">Senha</Label>
             <div className="relative">
               <LockKeyhole className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input id="auth-password" className="pl-10" type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Sua senha" />
+              <Input id="auth-password" className="pl-10" type="password" autoComplete={isSignUp ? "new-password" : "current-password"} value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Sua senha" />
             </div>
           </div>
+          {isSignUp && (
+            <div className="space-y-2">
+              <Label htmlFor="auth-confirm-password">Confirmar senha</Label>
+              <div className="relative">
+                <LockKeyhole className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Input id="auth-confirm-password" className="pl-10" type="password" autoComplete="new-password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} placeholder="Confirme sua senha" />
+              </div>
+            </div>
+          )}
           {error && <div className="rounded-md border border-loss/50 bg-loss/10 px-3 py-2 text-sm text-loss">{error}</div>}
           {message && <div className="rounded-md border border-profit/50 bg-profit/10 px-3 py-2 text-sm text-profit">{message}</div>}
-          <Button type="button" className="neon-button h-11 w-full text-base font-semibold" onClick={() => submit("sign-in")} disabled={!email || !password || loadingAction !== null}>
-            <LogIn className="h-5 w-5" />{loadingAction === "sign-in" ? "Entrando" : "Entrar"}
+          <Button type="button" className="neon-button h-11 w-full text-base font-semibold" onClick={submit} disabled={disabled}>
+            {isSignUp ? <UserPlus className="h-5 w-5" /> : <LogIn className="h-5 w-5" />}
+            {loadingAction === "sign-in" ? "Entrando" : loadingAction === "sign-up" ? "Criando" : isSignUp ? "Criar conta" : "Entrar"}
           </Button>
-          <Button type="button" variant="outline" className="h-11 w-full border-white/10 bg-white/[.035] hover:border-cyan-300/30 hover:bg-white/[.06]" onClick={() => submit("sign-up")} disabled={!email || !password || loadingAction !== null}>
-            <UserPlus className="h-4 w-4" />{loadingAction === "sign-up" ? "Criando" : "Criar conta"}
-          </Button>
+          <button type="button" className="w-full text-center text-sm text-muted-foreground transition hover:text-cyan-200" onClick={() => switchMode(isSignUp ? "sign-in" : "sign-up")}>
+            {isSignUp ? "Já tem conta? Entrar" : "Ainda não tem conta? Criar conta"}
+          </button>
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <span className="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
             <span>ou</span>

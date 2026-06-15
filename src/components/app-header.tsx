@@ -17,13 +17,15 @@ export function AppHeader({ user, onSignIn, onSignOut }: { user: User | null; on
             Performance <span className="gradient-text">de Trading</span>
           </span>
         </Link>
-        <nav className="hidden items-center gap-6 md:flex">
-          <Link className="relative text-sm font-semibold text-white after:absolute after:-bottom-2.5 after:left-1/2 after:h-px after:w-8 after:-translate-x-1/2 after:bg-cyan-300" href="/">Painel</Link>
-          <Link className="text-sm font-semibold text-muted-foreground transition hover:text-cyan-200" href="/annual">Anual</Link>
-          <Link className="text-sm font-semibold text-muted-foreground transition hover:text-cyan-200" href="/roi">ROI</Link>
-          <Link className="text-sm font-semibold text-muted-foreground transition hover:text-cyan-200" href="/growth">Crescimento</Link>
-          <Link className="text-sm font-semibold text-muted-foreground transition hover:text-cyan-200" href="/simulador">Simulador</Link>
-        </nav>
+        {user && (
+          <nav className="hidden items-center gap-6 md:flex">
+            <Link className="relative text-sm font-semibold text-white after:absolute after:-bottom-2.5 after:left-1/2 after:h-px after:w-8 after:-translate-x-1/2 after:bg-cyan-300" href="/">Painel</Link>
+            <Link className="text-sm font-semibold text-muted-foreground transition hover:text-cyan-200" href="/annual">Anual</Link>
+            <Link className="text-sm font-semibold text-muted-foreground transition hover:text-cyan-200" href="/roi">ROI</Link>
+            <Link className="text-sm font-semibold text-muted-foreground transition hover:text-cyan-200" href="/growth">Crescimento</Link>
+            <Link className="text-sm font-semibold text-muted-foreground transition hover:text-cyan-200" href="/simulador">Simulador</Link>
+          </nav>
+        )}
         <div className="flex items-center gap-2">
           {user ? (
             <>
