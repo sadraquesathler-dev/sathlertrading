@@ -75,14 +75,25 @@ export function useDashboardData(referenceDate: Date) {
   }, [refresh, supabase]);
 
   const signUpWithPassword = useCallback(async (email: string, password: string) => {
-    const { error: authError } = await supabase.auth.signUp({
+    const { data, error: authError } = await supabase.auth.signUp({
       email,
       password,
       options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
     });
     if (authError) throw authError;
-    await refresh();
+    if (data.session) {
+      await refresh();
+      return true;
+    }
+    return false;
   }, [refresh, supabase]);
+
+  const resetPasswordForEmail = useCallback(async (email: string) => {
+    const { error: authError } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    if (authError) throw authError;
+  }, [supabase]);
 
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();
@@ -94,5 +105,5 @@ export function useDashboardData(referenceDate: Date) {
   const filteredResults = useMemo(() => monthResults(results, referenceDate), [referenceDate, results]);
   const metrics = useMemo(() => calculateMetrics(filteredResults, Number(goal?.target_value ?? 0), referenceDate), [filteredResults, goal, referenceDate]);
 
-  return { user, goal, results: filteredResults, metrics, loading, error, signIn, signInWithPassword, signUpWithPassword, signOut, saveGoal, saveTrade, refresh };
+  return { user, goal, results: filteredResults, metrics, loading, error, signIn, signInWithPassword, signUpWithPassword, resetPasswordForEmail, signOut, saveGoal, saveTrade, refresh };
 }

@@ -15,7 +15,7 @@ import { formatCurrency, formatPercent } from "@/lib/format";
 
 export function DashboardShell() {
   const referenceDate = new Date();
-  const { user, goal, results, metrics, loading, error, signIn, signInWithPassword, signUpWithPassword, signOut, saveGoal, saveTrade } = useDashboardData(referenceDate);
+  const { user, goal, results, metrics, loading, error, signIn, signInWithPassword, signUpWithPassword, resetPasswordForEmail, signOut, saveGoal, saveTrade } = useDashboardData(referenceDate);
 
   if (!user && !loading) {
     return (
@@ -37,7 +37,7 @@ export function DashboardShell() {
               Entre com email e senha ou Google para registrar operações, acompanhar objetivos mensais, analisar estatísticas e projetar cenários até o último dia útil do mês.
             </p>
           </div>
-          <AuthPanel onGoogleSignIn={signIn} onPasswordSignIn={signInWithPassword} onPasswordSignUp={signUpWithPassword} />
+          <AuthPanel onGoogleSignIn={signIn} onPasswordSignIn={signInWithPassword} onPasswordSignUp={signUpWithPassword} onPasswordResetRequest={resetPasswordForEmail} />
         </section>
       </main>
     );
