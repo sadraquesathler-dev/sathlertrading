@@ -13,13 +13,13 @@ export function AppHeader({ user, onSignIn, onSignOut }: { user: User | null; on
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-primary/30 bg-primary/12 text-primary">
             <TrendingUp className="h-5 w-5" />
           </span>
-          <span className="truncate text-base font-semibold">Trade Performance</span>
+          <span className="truncate text-base font-semibold">Performance de Trading</span>
         </Link>
         <nav className="hidden items-center gap-2 md:flex">
-          <Button asChild variant="ghost"><Link href="/">Dashboard</Link></Button>
+          <Button asChild variant="ghost"><Link href="/">Painel</Link></Button>
           <Button asChild variant="ghost"><Link href="/annual">Anual</Link></Button>
           <Button asChild variant="ghost"><Link href="/roi">ROI</Link></Button>
-          <Button asChild variant="ghost"><Link href="/growth">Growth</Link></Button>
+          <Button asChild variant="ghost"><Link href="/growth">Crescimento</Link></Button>
           <Button asChild variant="ghost"><Link href="/simulador">Simulador</Link></Button>
         </nav>
         <div className="flex items-center gap-2">

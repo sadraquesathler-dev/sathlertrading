@@ -7,19 +7,19 @@ export function StatisticsPanel({ metrics }: { metrics: DashboardMetrics }) {
     ["Total de dias operados", metrics.operatedDays],
     ["Dias positivos", metrics.positiveDays],
     ["Dias negativos", metrics.negativeDays],
-    ["Win Rate", formatPercent(metrics.winRate)],
-    ["Profit Factor", metrics.profitFactor.toFixed(2)],
-    ["Media dos ganhos", formatCurrency(metrics.averageGain)],
-    ["Media das perdas", formatCurrency(metrics.averageLoss)],
+    ["Taxa de acerto", formatPercent(metrics.winRate)],
+    ["Fator de lucro", metrics.profitFactor.toFixed(2)],
+    ["Média dos ganhos", formatCurrency(metrics.averageGain)],
+    ["Média das perdas", formatCurrency(metrics.averageLoss)],
     ["Melhor dia", formatCurrency(metrics.bestDay)],
     ["Pior dia", formatCurrency(metrics.worstDay)],
-    ["Seq. maxima de ganhos", metrics.maxWinStreak],
-    ["Seq. maxima de perdas", metrics.maxLossStreak],
+    ["Seq. máxima de ganhos", metrics.maxWinStreak],
+    ["Seq. máxima de perdas", metrics.maxLossStreak],
   ];
 
   return (
     <Card>
-      <CardHeader><CardTitle>Estatisticas</CardTitle></CardHeader>
+      <CardHeader><CardTitle>Estatísticas</CardTitle></CardHeader>
       <CardContent>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-2">
           {items.map(([label, value]) => (

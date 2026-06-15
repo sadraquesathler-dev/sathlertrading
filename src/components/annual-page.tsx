@@ -23,13 +23,13 @@ export function AnnualPage() {
     <main className="market-grid min-h-screen pb-10">
       <header className="border-b border-border/80 bg-background/82 backdrop-blur-xl">
         <div className="container flex h-16 items-center justify-between">
-          <Button asChild variant="ghost"><Link href="/"><ArrowLeft className="h-4 w-4" />Dashboard</Link></Button>
+          <Button asChild variant="ghost"><Link href="/"><ArrowLeft className="h-4 w-4" />Painel</Link></Button>
           {!user && !loading && <Button onClick={signIn}><BarChart3 className="h-4 w-4" />Entrar</Button>}
         </div>
       </header>
       <div className="container space-y-6 pt-6">
         <div>
-          <p className="text-sm uppercase text-muted-foreground">Dashboard anual</p>
+          <p className="text-sm uppercase text-muted-foreground">Painel anual</p>
           <h1 className="text-3xl font-semibold tracking-normal">{year}</h1>
         </div>
         {error && <div className="rounded-md border border-loss/40 bg-loss/10 px-3 py-2 text-sm text-loss">{error}</div>}
@@ -39,12 +39,12 @@ export function AnnualPage() {
           <>
             <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               <MetricCard title="Resultado acumulado" value={formatCurrency(total)} icon={Wallet} tone={total >= 0 ? "profit" : "loss"} />
-              <MetricCard title="Melhor mes" value={`${bestMonth.monthLabel} ${formatCurrency(bestMonth.result)}`} icon={TrendingUp} tone="profit" />
-              <MetricCard title="Pior mes" value={`${worstMonth.monthLabel} ${formatCurrency(worstMonth.result)}`} icon={TrendingDown} tone="loss" />
+              <MetricCard title="Melhor mês" value={`${bestMonth.monthLabel} ${formatCurrency(bestMonth.result)}`} icon={TrendingUp} tone="profit" />
+              <MetricCard title="Pior mês" value={`${worstMonth.monthLabel} ${formatCurrency(worstMonth.result)}`} icon={TrendingDown} tone="loss" />
               <MetricCard title="Meses acompanhados" value={String(monthsWithData.length)} icon={CalendarRange} tone="accent" />
             </section>
             <Card>
-              <CardHeader><CardTitle>Resultado x Meta por mes</CardTitle></CardHeader>
+              <CardHeader><CardTitle>Resultado x Objetivo por mês</CardTitle></CardHeader>
               <CardContent className="h-96">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={overview} margin={{ left: 0, right: 12, top: 12, bottom: 0 }}>
@@ -54,7 +54,7 @@ export function AnnualPage() {
                     <Tooltip formatter={(value) => formatCurrency(Number(value))} contentStyle={{ background: "#101722", border: "1px solid #263241", borderRadius: 8 }} />
                     <Legend />
                     <Bar dataKey="result" name="Resultado" fill="#18d27f" radius={[4, 4, 0, 0]} />
-                    <Bar dataKey="target" name="Meta" fill="#41b5ff" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="target" name="Objetivo" fill="#41b5ff" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -70,7 +70,7 @@ export function AnnualPage() {
                         <Target className="h-4 w-4 text-accent" />
                       </div>
                       <div className="mt-2 text-sm text-muted-foreground">Resultado {formatCurrency(item.result)}</div>
-                      <div className="text-sm text-muted-foreground">Meta {formatCurrency(item.target)}</div>
+                      <div className="text-sm text-muted-foreground">Objetivo {formatCurrency(item.target)}</div>
                       <div className={item.achievement >= 100 ? "mt-2 text-profit" : "mt-2 text-foreground"}>{formatPercent(item.achievement)}</div>
                     </div>
                   ))}
@@ -79,7 +79,7 @@ export function AnnualPage() {
             </Card>
           </>
         ) : (
-          <EmptyState icon={BarChart3} title="Sem dados anuais" description="Entre e registre metas ou operacoes para visualizar a performance por mes." />
+          <EmptyState icon={BarChart3} title="Sem dados anuais" description="Entre e registre objetivos ou operações para visualizar a performance por mês." />
         )}
       </div>
     </main>

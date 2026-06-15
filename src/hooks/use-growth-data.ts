@@ -26,7 +26,7 @@ export function useGrowthData() {
       }
       setResults(await getAllTradeResults(supabase, currentUser));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Falha ao carregar evolucao real.");
+      setError(err instanceof Error ? err.message : "Falha ao carregar a evolução real.");
     } finally {
       setLoading(false);
     }

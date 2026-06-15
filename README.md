@@ -1,19 +1,19 @@
-# Trade Performance Dashboard
+# Painel de Performance de Trading
 
-Aplicacao web profissional para acompanhamento de performance financeira de trader, feita com Next.js 15, TypeScript, Tailwind CSS, Supabase, Recharts, Lucide Icons e componentes no padrao Shadcn/UI.
+Aplicação web profissional para acompanhamento de performance financeira de trader, feita com Next.js 15, TypeScript, Tailwind CSS, Supabase, Recharts, Lucide Icons e componentes no padrão Shadcn/UI.
 
 ## Funcionalidades
 
 - Login com Google via Supabase Auth.
-- Dados isolados por usuario com RLS no Supabase.
-- Dashboard mensal com resultado acumulado, meta, percentual, meta restante, dias uteis restantes, meta diaria necessaria, media diaria, melhor e pior dia.
-- Equity Curve com resultado acumulado por data.
-- Projecao conservadora, realista e otimista ate o ultimo dia util do mes.
-- Calendario mensal com cadastro/edicao de resultado financeiro e observacoes.
-- Estatisticas de operacao: win rate, profit factor, medias, sequencias e extremos.
+- Dados isolados por usuário com RLS no Supabase.
+- Painel mensal com resultado acumulado, objetivo mensal, percentual atingido, objetivo restante, dias úteis restantes, objetivo diário necessário, média diária, melhor e pior dia.
+- Curva de Capital com resultado acumulado por data.
+- Projeção conservadora, realista e otimista até o último dia útil do mês.
+- Calendário mensal com cadastro/edição de resultado financeiro e observações.
+- Estatísticas de operação: taxa de acerto, profit factor, médias, sequências e extremos.
 - Simulador de crescimento em pagina separada.
-- Dashboard anual em `/annual`, ROI em `/roi` e evolucao da conta em `/growth`.
-- Dias uteis calculados com fins de semana e feriados brasileiros.
+- Painel anual em `/annual`, ROI em `/roi` e crescimento da conta em `/growth`.
+- Dias úteis calculados com fins de semana e feriados brasileiros.
 - Controle de drawdown atual e maximo no dashboard principal.
 - Tema dark responsivo inspirado em dashboards financeiros profissionais.
 
@@ -26,7 +26,7 @@ npm run dev
 
 Acesse `http://localhost:3000`.
 
-## Configuracao Supabase
+## Configuração Supabase
 
 1. Crie um projeto no Supabase.
 2. Copie `.env.example` para `.env.local` e preencha:
@@ -50,16 +50,16 @@ https://seu-dominio.com/auth/callback
 ```
 
 5. Execute as migrations em `supabase/migrations` no SQL Editor ou via Supabase CLI.
-6. Opcionalmente execute `supabase/seed.sql` para criar dados de exemplo para o usuario autenticado atual.
+6. Opcionalmente execute `supabase/seed.sql` para criar dados de exemplo para o usuário autenticado atual.
 
 ## Estrutura
 
 ```text
 src/app                 Rotas App Router
-src/components          Componentes reutilizaveis
+src/components          Componentes reutilizáveis
 src/components/ui       Componentes estilo Shadcn/UI
 src/hooks               Hooks da aplicacao
-src/lib                 Supabase, formatadores, calculos e utilitarios
+src/lib                 Supabase, formatadores, cálculos e utilitários
 src/services            Consultas e mutations do Supabase
 src/types               Tipos TypeScript
 supabase/migrations     SQL de banco e RLS
@@ -68,8 +68,8 @@ supabase/seed.sql       Seed inicial
 
 ## Regras financeiras
 
-- Sabados e domingos nao contam como dias uteis.
-- Meta Restante = Meta Mensal - Resultado Acumulado.
-- Meta Diaria Necessaria = Meta Restante / Dias Uteis Restantes.
-- Percentual de Atingimento = Resultado Acumulado / Meta Mensal x 100.
-- Cenarios de projecao: conservador 80%, realista 100%, otimista 120% da media diaria atual.
+- Sábados e domingos não contam como dias úteis.
+- Objetivo restante = Objetivo mensal - Resultado acumulado.
+- Objetivo diário necessário = Objetivo restante / Dias úteis restantes.
+- Percentual de atingimento = Resultado acumulado / Objetivo mensal x 100.
+- Cenários de projeção: conservador 80%, realista 100%, otimista 120% da média diária atual.

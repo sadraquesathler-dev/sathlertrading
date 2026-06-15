@@ -31,10 +31,10 @@ export function AuthPanel({
         await onPasswordSignIn(email, password);
       } else {
         await onPasswordSignUp(email, password);
-        setMessage("Conta criada. Se a confirmacao por email estiver ativa no Supabase, confirme seu email antes de entrar.");
+        setMessage("Conta criada. Se a confirmação por email estiver ativa no Supabase, confirme seu email antes de entrar.");
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Nao foi possivel autenticar.");
+      setError(err instanceof Error ? err.message : "Não foi possível autenticar.");
     } finally {
       setLoadingAction(null);
     }

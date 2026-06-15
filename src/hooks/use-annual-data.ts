@@ -33,7 +33,7 @@ export function useAnnualData(year: number) {
       setGoals(goalData);
       setResults(resultData);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Falha ao carregar o dashboard anual.");
+      setError(err instanceof Error ? err.message : "Falha ao carregar o painel anual.");
     } finally {
       setLoading(false);
     }
@@ -53,4 +53,3 @@ export function useAnnualData(year: number) {
 
   return { user, goals, results, overview, loading, error, signIn };
 }
-

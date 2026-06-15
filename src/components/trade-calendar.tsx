@@ -44,7 +44,7 @@ export function TradeCalendar({ referenceDate, results, onSave }: { referenceDat
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>Calendario de operacoes</CardTitle>
+        <CardTitle>Calendário de operações</CardTitle>
         <CalendarDays className="h-4 w-4 text-accent" />
       </CardHeader>
       <CardContent>
@@ -89,9 +89,9 @@ export function TradeCalendar({ referenceDate, results, onSave }: { referenceDat
             </div>
             <div className="space-y-2">
               <Label htmlFor="notes">Observacao</Label>
-              <Textarea id="notes" value={notes} onChange={(event) => setNotes(event.target.value)} placeholder="Contexto, setup, emocao, gestao de risco..." />
+              <Textarea id="notes" value={notes} onChange={(event) => setNotes(event.target.value)} placeholder="Contexto, setup, emoção, gestão de risco..." />
             </div>
-            <Button type="submit" disabled={saving} className="w-full"><Save className="h-4 w-4" />{saving ? "Salvando" : "Salvar operacao"}</Button>
+            <Button type="submit" disabled={saving} className="w-full"><Save className="h-4 w-4" />{saving ? "Salvando" : "Salvar operação"}</Button>
           </form>
         </DialogContent>
       </Dialog>

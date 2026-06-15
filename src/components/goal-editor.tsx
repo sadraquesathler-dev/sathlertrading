@@ -22,7 +22,7 @@ export function GoalEditor({ value, onSave }: { value: number; onSave: (value: n
 
   return (
     <Card>
-      <CardHeader><CardTitle>Meta mensal</CardTitle></CardHeader>
+      <CardHeader><CardTitle>Objetivo Mensal</CardTitle></CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
           <div className="space-y-2">

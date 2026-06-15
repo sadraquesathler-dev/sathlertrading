@@ -32,18 +32,18 @@ function addDays(date: Date, days: number) {
 export function getBrazilNationalHolidays(year: number): Holiday[] {
   const easter = easterDate(year);
   return [
-    { date: new Date(year, 0, 1), name: "Confraternizacao Universal" },
+    { date: new Date(year, 0, 1), name: "Confraternização Universal" },
     { date: addDays(easter, -48), name: "Carnaval" },
     { date: addDays(easter, -47), name: "Carnaval" },
     { date: addDays(easter, -2), name: "Sexta-feira Santa" },
     { date: addDays(easter, 60), name: "Corpus Christi" },
     { date: new Date(year, 3, 21), name: "Tiradentes" },
     { date: new Date(year, 4, 1), name: "Dia do Trabalho" },
-    { date: new Date(year, 8, 7), name: "Independencia do Brasil" },
+    { date: new Date(year, 8, 7), name: "Independência do Brasil" },
     { date: new Date(year, 9, 12), name: "Nossa Senhora Aparecida" },
     { date: new Date(year, 10, 2), name: "Finados" },
-    { date: new Date(year, 10, 15), name: "Proclamacao da Republica" },
-    { date: new Date(year, 10, 20), name: "Consciencia Negra" },
+    { date: new Date(year, 10, 15), name: "Proclamação da República" },
+    { date: new Date(year, 10, 20), name: "Consciência Negra" },
     { date: new Date(year, 11, 25), name: "Natal" },
   ];
 }

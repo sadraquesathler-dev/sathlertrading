@@ -24,8 +24,8 @@ export function DashboardShell() {
         <section className="container grid min-h-[calc(100vh-4rem)] items-center gap-8 py-10 lg:grid-cols-[1fr_420px]">
           <div className="max-w-3xl space-y-6">
             <div className="inline-flex rounded-md border border-primary/30 bg-primary/10 px-3 py-1 text-sm text-primary">Performance financeira com dados privados</div>
-            <h1 className="text-4xl font-semibold tracking-normal sm:text-6xl">Controle sua curva de capital com precisao profissional.</h1>
-            <p className="max-w-2xl text-lg text-muted-foreground">Entre com email e senha ou Google para registrar operacoes, acompanhar metas mensais, analisar estatisticas e projetar cenarios ate o ultimo dia util do mes.</p>
+            <h1 className="text-4xl font-semibold tracking-normal sm:text-6xl">Controle sua curva de capital com precisão profissional.</h1>
+            <p className="max-w-2xl text-lg text-muted-foreground">Entre com email e senha ou Google para registrar operações, acompanhar objetivos mensais, analisar estatísticas e projetar cenários até o último dia útil do mês.</p>
           </div>
           <AuthPanel onGoogleSignIn={signIn} onPasswordSignIn={signInWithPassword} onPasswordSignUp={signUpWithPassword} />
         </section>
@@ -52,19 +52,19 @@ export function DashboardShell() {
             <GoalEditor value={Number(goal?.target_value ?? 0)} onSave={saveGoal} />
             <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
               <MetricCard title="Resultado acumulado" value={formatCurrency(metrics.accumulated)} icon={Wallet} tone={metrics.accumulated >= 0 ? "profit" : "loss"} />
-              <MetricCard title="Meta do mes" value={formatCurrency(metrics.target)} icon={Target} tone="accent" />
+              <MetricCard title="Objetivo Mensal" value={formatCurrency(metrics.target)} icon={Target} tone="accent" />
               <MetricCard title="Atingimento" value={formatPercent(metrics.achievement)} icon={Gauge} tone={metrics.achievement >= 100 ? "profit" : "neutral"} />
-              <MetricCard title="Meta restante" value={formatCurrency(metrics.remainingGoal)} icon={PiggyBank} tone={metrics.goalReached ? "profit" : "neutral"} caption={metrics.goalReached ? "Meta atingida" : undefined} />
-              <MetricCard title="Dias uteis restantes" value={String(metrics.remainingBusinessDays)} icon={CalendarClock} />
-              <MetricCard title="Meta diaria necessaria" value={formatCurrency(metrics.requiredDailyGoal)} icon={BadgeDollarSign} tone={metrics.goalReached ? "profit" : "neutral"} caption={metrics.goalReached ? "Meta atingida" : "Exclui fins de semana e feriados"} />
-              <MetricCard title="Media diaria" value={formatCurrency(metrics.averageDaily)} icon={Activity} tone={metrics.averageDaily >= 0 ? "profit" : "loss"} />
+              <MetricCard title="Objetivo restante" value={formatCurrency(metrics.remainingGoal)} icon={PiggyBank} tone={metrics.goalReached ? "profit" : "neutral"} caption={metrics.goalReached ? "Objetivo atingido" : undefined} />
+              <MetricCard title="Dias úteis restantes" value={String(metrics.remainingBusinessDays)} icon={CalendarClock} />
+              <MetricCard title="Objetivo diário necessário" value={formatCurrency(metrics.requiredDailyGoal)} icon={BadgeDollarSign} tone={metrics.goalReached ? "profit" : "neutral"} caption={metrics.goalReached ? "Objetivo atingido" : "Exclui fins de semana e feriados"} />
+              <MetricCard title="Média diária" value={formatCurrency(metrics.averageDaily)} icon={Activity} tone={metrics.averageDaily >= 0 ? "profit" : "loss"} />
               <MetricCard title="Melhor dia" value={formatCurrency(metrics.bestDay)} icon={TrendingUp} tone="profit" />
               <MetricCard title="Pior dia" value={formatCurrency(metrics.worstDay)} icon={TrendingDown} tone="loss" />
-              <MetricCard title="Operacoes" value={String(metrics.operatedDays)} icon={LineChart} />
-              <MetricCard title="Equity atual" value={formatCurrency(metrics.currentEquity)} icon={Wallet} tone={metrics.currentEquity >= 0 ? "profit" : "loss"} />
-              <MetricCard title="Equity maxima" value={formatCurrency(metrics.maxEquity)} icon={Landmark} tone="accent" />
+              <MetricCard title="Operações" value={String(metrics.operatedDays)} icon={LineChart} />
+              <MetricCard title="Capital atual" value={formatCurrency(metrics.currentEquity)} icon={Wallet} tone={metrics.currentEquity >= 0 ? "profit" : "loss"} />
+              <MetricCard title="Capital máximo" value={formatCurrency(metrics.maxEquity)} icon={Landmark} tone="accent" />
               <MetricCard title="Drawdown atual" value={formatCurrency(metrics.currentDrawdown)} icon={TrendingDown} tone={metrics.currentDrawdown > 0 ? "loss" : "profit"} />
-              <MetricCard title="Drawdown maximo" value={formatCurrency(metrics.maxDrawdown)} icon={ShieldCheck} tone={metrics.maxDrawdown > 0 ? "loss" : "profit"} />
+              <MetricCard title="Drawdown máximo" value={formatCurrency(metrics.maxDrawdown)} icon={ShieldCheck} tone={metrics.maxDrawdown > 0 ? "loss" : "profit"} />
             </section>
             <PerformanceCharts results={results} />
             <div className="grid gap-4 2xl:grid-cols-[1.1fr_.9fr]">

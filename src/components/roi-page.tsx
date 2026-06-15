@@ -31,13 +31,13 @@ export function RoiPage() {
     <main className="market-grid min-h-screen pb-10">
       <header className="border-b border-border/80 bg-background/82 backdrop-blur-xl">
         <div className="container flex h-16 items-center justify-between">
-          <Button asChild variant="ghost"><Link href="/"><ArrowLeft className="h-4 w-4" />Dashboard</Link></Button>
+          <Button asChild variant="ghost"><Link href="/"><ArrowLeft className="h-4 w-4" />Painel</Link></Button>
           <div className="flex items-center gap-2 text-sm text-muted-foreground"><BadgePercent className="h-4 w-4 text-primary" />ROI</div>
         </div>
       </header>
       <div className="container space-y-6 pt-6">
         <div>
-          <p className="text-sm uppercase text-muted-foreground">Dashboard de ROI</p>
+          <p className="text-sm uppercase text-muted-foreground">Painel de ROI</p>
           <h1 className="text-3xl font-semibold tracking-normal">Retorno sobre capital</h1>
         </div>
         <div className="grid gap-4 lg:grid-cols-[360px_1fr]">
@@ -55,7 +55,7 @@ export function RoiPage() {
               <MetricCard title="Crescimento acumulado" value={formatCurrency(current)} icon={TrendingUp} tone="accent" />
             </section>
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between"><CardTitle>Evolucao</CardTitle><LineChartIcon className="h-4 w-4 text-primary" /></CardHeader>
+              <CardHeader className="flex flex-row items-center justify-between"><CardTitle>Evolução</CardTitle><LineChartIcon className="h-4 w-4 text-primary" /></CardHeader>
               <CardContent className="h-96">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={data} margin={{ left: 0, right: 12, top: 12, bottom: 0 }}>

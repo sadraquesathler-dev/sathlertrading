@@ -16,7 +16,7 @@ export function PerformanceCharts({ results }: { results: TradeResult[] }) {
   return (
     <div className="grid gap-4 xl:grid-cols-2">
       <Card>
-        <CardHeader><CardTitle>Equity Curve</CardTitle></CardHeader>
+        <CardHeader><CardTitle>Curva de Capital</CardTitle></CardHeader>
         <CardContent className="h-80">
           {equity.length ? (
             <ResponsiveContainer width="100%" height="100%">
@@ -29,12 +29,12 @@ export function PerformanceCharts({ results }: { results: TradeResult[] }) {
               </LineChart>
             </ResponsiveContainer>
           ) : (
-            <EmptyState icon={LineChartIcon} title="Sem operacoes no mes" description="Cadastre um resultado no calendario para iniciar a curva de equity." />
+            <EmptyState icon={LineChartIcon} title="Sem operações no mês" description="Cadastre um resultado no calendário para iniciar a curva de capital." />
           )}
         </CardContent>
       </Card>
       <Card>
-        <CardHeader><CardTitle>Projecao mensal</CardTitle></CardHeader>
+        <CardHeader><CardTitle>Projeção até o fim do mês</CardTitle></CardHeader>
         <CardContent className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={projection} margin={{ left: 0, right: 12, top: 12, bottom: 0 }}>

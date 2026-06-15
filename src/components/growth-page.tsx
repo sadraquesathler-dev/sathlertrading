@@ -23,7 +23,7 @@ export function GrowthPage() {
   const distance = Math.max(target - currentEquity, 0);
   const progress = target > initial ? ((currentEquity - initial) / (target - initial)) * 100 : 0;
   const averageResult = results.length ? results.reduce((sum, item) => sum + Number(item.result_value), 0) / results.length : 0;
-  const arrivalProjection = averageResult > 0 && distance > 0 ? `${Math.ceil(distance / averageResult)} operacoes` : distance === 0 ? "Objetivo atingido" : "Sem tendencia positiva";
+  const arrivalProjection = averageResult > 0 && distance > 0 ? `${Math.ceil(distance / averageResult)} operações` : distance === 0 ? "Objetivo atingido" : "Sem tendência positiva";
 
   const chartData = useMemo(() => {
     const steps = Math.max(12, equityCurve.length || 12);
@@ -42,13 +42,13 @@ export function GrowthPage() {
     <main className="market-grid min-h-screen pb-10">
       <header className="border-b border-border/80 bg-background/82 backdrop-blur-xl">
         <div className="container flex h-16 items-center justify-between">
-          <Button asChild variant="ghost"><Link href="/"><ArrowLeft className="h-4 w-4" />Dashboard</Link></Button>
+          <Button asChild variant="ghost"><Link href="/"><ArrowLeft className="h-4 w-4" />Painel</Link></Button>
           {!user && !loading && <Button onClick={signIn}><TrendingUp className="h-4 w-4" />Entrar</Button>}
         </div>
       </header>
       <div className="container space-y-6 pt-6">
         <div>
-          <p className="text-sm uppercase text-muted-foreground">Evolucao da conta</p>
+          <p className="text-sm uppercase text-muted-foreground">Crescimento da conta</p>
           <h1 className="text-3xl font-semibold tracking-normal">Curva planejada x real</h1>
         </div>
         {error && <div className="rounded-md border border-loss/40 bg-loss/10 px-3 py-2 text-sm text-loss">{error}</div>}
@@ -65,13 +65,13 @@ export function GrowthPage() {
               <Skeleton className="h-28" />
             ) : (
               <section className="grid gap-4 sm:grid-cols-3">
-                <MetricCard title="Percentual concluido" value={formatPercent(Math.max(0, Math.min(progress, 100)))} icon={Target} tone={progress >= 100 ? "profit" : "accent"} />
-                <MetricCard title="Distancia ate a meta" value={formatCurrency(distance)} icon={Flag} tone={distance === 0 ? "profit" : "neutral"} />
-                <MetricCard title="Projecao de chegada" value={arrivalProjection} icon={Wallet} tone={distance === 0 ? "profit" : "neutral"} />
+                <MetricCard title="Percentual concluído" value={formatPercent(Math.max(0, Math.min(progress, 100)))} icon={Target} tone={progress >= 100 ? "profit" : "accent"} />
+                <MetricCard title="Distância até o objetivo" value={formatCurrency(distance)} icon={Flag} tone={distance === 0 ? "profit" : "neutral"} />
+                <MetricCard title="Projeção de chegada" value={arrivalProjection} icon={Wallet} tone={distance === 0 ? "profit" : "neutral"} />
               </section>
             )}
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between"><CardTitle>Growth Curve</CardTitle><LineChartIcon className="h-4 w-4 text-primary" /></CardHeader>
+              <CardHeader className="flex flex-row items-center justify-between"><CardTitle>Curva de Crescimento</CardTitle><LineChartIcon className="h-4 w-4 text-primary" /></CardHeader>
               <CardContent className="h-96">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={chartData} margin={{ left: 0, right: 12, top: 12, bottom: 0 }}>
